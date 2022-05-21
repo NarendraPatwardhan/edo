@@ -17,4 +17,4 @@ min: build
 	@upx ${BINARY_PATH}
 
 run: min
-	@./${BINARY_PATH}
+	@time ./${BINARY_PATH}
