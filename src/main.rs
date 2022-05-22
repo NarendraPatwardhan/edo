@@ -14,7 +14,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         });
     }
     manager.close_transmission();
-    let val = manager.aggregate_results().await;
-    println!("{:?}", val);
+    let val = manager.fetch_results().await;
+    let mut successes = 0;
+    let mut failures = 0;
+    for v in val {
+        match v {
+            Ok(_) => successes += 1,
+            Err(_) => failures += 1,
+        }
+    }
+    println!(
+        "Process completed with {} successes and {} failures",
+        successes, failures
+    );
     Ok(())
 }
