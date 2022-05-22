@@ -24,12 +24,13 @@ impl<T> TokioManager<T> {
         }
     }
 
-    pub fn close_transmission(&mut self) {
+    fn close_transmission(&mut self) {
         self.tx = None;
     }
 
     pub async fn fetch_results(&mut self) -> &Vec<T> {
         if self.res.is_none() {
+            self.close_transmission();
             let mut v = Vec::new();
             while let Some(msg) = self.rx.recv().await {
                 v.push(msg);

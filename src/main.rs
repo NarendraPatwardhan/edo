@@ -13,7 +13,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         });
     }
-    manager.close_transmission();
     let val = manager.fetch_results().await;
     let mut successes = 0;
     let mut failures = 0;
